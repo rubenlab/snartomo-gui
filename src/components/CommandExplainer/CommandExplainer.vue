@@ -55,9 +55,11 @@ const setCollapse = (key: string, arr: Array<string>) => {
           </div>
         </template>
         <el-row>
-          <el-col :span="4">default value: {{ argument.default }}</el-col>
-          <el-col :span="2">input value:</el-col>
-          <el-col :span="6">
+          <el-col :md="4" :sm="12"
+            >default value: {{ argument.default }}</el-col
+          >
+          <el-col :md="2" :sm="3">input value:</el-col>
+          <el-col :md="6" :sm="9">
             <el-input
               :label="argument.name"
               v-model="map[argument.name]"
