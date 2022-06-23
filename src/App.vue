@@ -6,7 +6,6 @@ import type { TabsPaneContext } from "element-plus";
 const activeName = ref("/");
 const router = useRouter();
 const handleClick = (tab: TabsPaneContext, event: Event) => {
-  console.log(tab, event);
   router.push({ path: tab.paneName as string });
 };
 </script>
