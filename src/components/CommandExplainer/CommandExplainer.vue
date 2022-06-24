@@ -42,7 +42,7 @@ const setCollapse = (key: string, arr: Array<string>) => {
 
 <template>
   <el-affix position="top">
-    <h3 style="background-color: black; color: yellow; margin-top: 0">
+    <h3 style="background-color: black; color: chocolate; margin-top: 0">
       Command:
       <pre>{{ command }}</pre>
     </h3>
