@@ -1,4 +1,4 @@
-import type { Group } from "@/components/CommandExplainer/model";
+import { Type, type Group } from "@/components/CommandExplainer/model";
 
 const commonGroups: Array<Group> = [
   {
@@ -94,6 +94,7 @@ const commonGroups: Array<Group> = [
         name: "do_topaz",
         default: "false",
         description: "Flag to denoise",
+        type: Type.Bool,
       },
       {
         name: "topaz_exe",
@@ -125,6 +126,7 @@ const commonGroups: Array<Group> = [
         name: "do_etomo",
         default: "false",
         description: "Flag to reconstruct using eTomo",
+        type: Type.Bool,
       },
       {
         name: "batch_directive",

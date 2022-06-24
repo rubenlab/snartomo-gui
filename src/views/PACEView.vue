@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive } from "vue";
 import CommandExplainer from "@/components/CommandExplainer";
-import type { Command } from "@/components/CommandExplainer/model";
+import { Type, type Command } from "@/components/CommandExplainer/model";
 import commonGroups from "./commonGroups";
 
 const command: Command = {
@@ -77,16 +77,19 @@ In theory, a frames file can have multiple lines, if for example the first N fra
           name: "testing",
           default: "false",
           description: "Testing mode",
+          type: Type.Bool,
         },
         {
           name: "slow",
           default: "false",
           description: "In testing mode, simulates a delay in file creation",
+          type: Type.Bool,
         },
         {
           name: "overwrite",
           default: "false",
           description: "Overwrite output directory (only if no EERs)",
+          type: Type.Bool,
         },
         {
           name: "max_minutes",

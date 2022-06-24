@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import CommandExplainer from "@/components/CommandExplainer";
-import type { Command } from "@/components/CommandExplainer/model";
+import { Type, type Command } from "@/components/CommandExplainer/model";
 import commonGroups from "./commonGroups";
 
 const command: Command = {
@@ -59,11 +59,13 @@ The gain file can either be in TIFF or MRC format. If it's in TIFF format, SNART
           name: "testing",
           default: "false",
           description: "Testing mode",
+          type: Type.Bool,
         },
         {
           name: "overwrite",
           default: "false",
           description: "Overwrite output directory (only if no EERs)",
+          type: Type.Bool,
         },
         {
           name: "max_minutes",

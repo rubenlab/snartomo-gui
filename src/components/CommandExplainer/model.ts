@@ -1,8 +1,13 @@
+enum Type {
+  Bool = "bool",
+}
+
 type Argument = {
   name: string;
   default?: string | number;
   description: string;
   required?: boolean;
+  type?: Type;
 };
 
 type Group = {
@@ -50,4 +55,4 @@ class CommandBuilder {
 }
 
 export type { Command, Group, Argument };
-export { CommandBuilder };
+export { Type, CommandBuilder };

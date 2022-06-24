@@ -41,6 +41,12 @@ const setCollapse = (key: string, arr: Array<string>) => {
 </script>
 
 <template>
+  <el-affix position="top">
+    <h3 style="background-color: black; color: yellow; margin-top: 0">
+      Command:
+      <pre>{{ command }}</pre>
+    </h3>
+  </el-affix>
   <el-collapse v-model="state.activeNames">
     <el-collapse-item
       v-for="group in props.groups"
@@ -57,7 +63,17 @@ const setCollapse = (key: string, arr: Array<string>) => {
         <el-row>
           <el-col :md="4" :sm="6">Input here:</el-col>
           <el-col :md="12" :sm="18">
+            <el-select
+              v-if="argument.type === 'bool'"
+              v-model="map[argument.name]"
+              placeholder="Select"
+              clearable
+            >
+              <el-option label="True" value="true" />
+              <el-option label="False" value="false" />
+            </el-select>
             <el-input
+              v-else
               :label="argument.name"
               v-model="map[argument.name]"
               placeholder="Please input"
@@ -84,13 +100,6 @@ const setCollapse = (key: string, arr: Array<string>) => {
       </el-card>
     </el-collapse-item>
   </el-collapse>
-  <div style="display: block; height: 70px"></div>
-  <el-affix position="bottom" :offset="70">
-    <h3 style="background-color: white">
-      Command:
-      <pre>{{ command }}</pre>
-    </h3>
-  </el-affix>
 </template>
 
 <style scoped>
