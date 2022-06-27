@@ -81,6 +81,11 @@ const commonGroups: Array<Group> = [
         description: "Maximum defocus value, Å",
       },
       {
+        name: "df_step",
+        default: 500.0,
+        description: "Defocus search step during fitting, Angstroms",
+      },
+      {
         name: "ast_step",
         default: 100.0,
         description: "Astigmatism search step during fitting, Å",
@@ -193,7 +198,7 @@ https://rubsak.wiki.gwdg.de/doku.php?id=computers:etomo#batch_directive
         description: "Number of patches in x & y (delimited by spaces)",
       },
       {
-        name: "duration",
+        name: "are_time",
         default: "30m",
         description: "Maximum duration (AreTomo sometimes hangs)",
       },

@@ -32,9 +32,19 @@ NOTE1: The last angle does not necessarily correspond to the highest tilt angle,
 
 NOTE2: It is assumed that every tilt series is collected to the same last angle. If the last angle varies, the program may get stuck while looking for an EER file which will never exist. Instead, run SNARTomoPACE separately for tilt series which are collected to a different last angle.`,
         },
+      ],
+    },
+    {
+      name: "Global",
+      arguments: [
+        {
+          name: "eer_dir",
+          default: "frames",
+          description: "Input EER directory",
+        },
         {
           name: "frame_file",
-          required: true,
+          default: "motioncor-frame.txt",
           description: `The frame file is used by MotionCor2 for dose-weighting. It is a text file containing the following three values, separated by spaces:
 
 The number of frames to include
@@ -48,19 +58,14 @@ For the second value, a reasonable rule of thumb is to accumulate 0.15-0.20 elec
 
 In theory, a frames file can have multiple lines, if for example the first N frames were to be handled differently than the next M frames. However, we haven't tested this functionality yet.`,
         },
-      ],
-    },
-    {
-      name: "Global",
-      arguments: [
-        {
-          name: "eer_dir",
-          default: "frames",
-          description: "Input EER directory",
-        },
         {
           name: "tilt_tolerance",
           default: 0.2,
+          description: "Pixel size, Å/px",
+        },
+        {
+          name: "apix",
+          default: -1.0,
           description: "Pixel size, Å/px",
         },
         {
@@ -69,9 +74,9 @@ In theory, a frames file can have multiple lines, if for example the first N fra
           description: "Output directory",
         },
         {
-          name: "apix",
-          default: -1.0,
-          description: "Pixel size, Å/px",
+          name: "verbosity",
+          default: 5,
+          description: "Verbosity level (0..8)",
         },
         {
           name: "testing",
@@ -86,9 +91,16 @@ In theory, a frames file can have multiple lines, if for example the first N fra
           type: Type.Bool,
         },
         {
+          name: "debug",
+          default: "false",
+          description: "Flag for debugging",
+          type: Type.Bool,
+        },
+        {
           name: "overwrite",
           default: "false",
-          description: "Overwrite output directory (only if no EERs)",
+          description:
+            "Flag to overwrite pre-existing output directory (only if no EERs)",
           type: Type.Bool,
         },
         {
@@ -97,9 +109,9 @@ In theory, a frames file can have multiple lines, if for example the first N fra
           description: "Maximum run time, minutes",
         },
         {
-          name: "verbosity",
+          name: "cpu_slots",
           default: 2,
-          description: "Verbosity level (0..9)",
+          description: "Maximum number of CPU processes to run concurrently",
         },
         {
           name: "wait",

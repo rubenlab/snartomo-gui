@@ -10,11 +10,21 @@ const command: Command = {
       name: "Required",
       arguments: [
         {
+          name: "eer_dir",
+          default: "frames",
+          description: "Input EER directory",
+        },
+        {
           name: "gain_file",
           required: true,
           description: `The gain file is used to compensate for systematic errors in the camera.
 
 The gain file can either be in TIFF or MRC format. If it's in TIFF format, SNARTomo will automatically convert it to MRC for use with MotionCor2.`,
+        },
+        {
+          name: "frame_file",
+          default: "motioncor-frame.txt",
+          description: "Input MotionCor2 frame file",
         },
       ],
     },
@@ -22,33 +32,18 @@ The gain file can either be in TIFF or MRC format. If it's in TIFF format, SNART
       name: "Global",
       arguments: [
         {
-          name: "eer_dir",
-          default: "frames",
-          description: "Input EER directory",
-        },
-        {
-          name: "frame_file",
-          default: "motioncor-frame.txt",
-          description: "Input MotionCor2 frame file",
-        },
-        {
           name: "mdoc_file",
           description: "Input example MDOC file",
+        },
+        {
+          name: "apix",
+          default: -1.0,
+          description: "Pixel size, Å/px",
         },
         {
           name: "outdir",
           default: "SNARTomo",
           description: "Output directory",
-        },
-        {
-          name: "cmd_file",
-          default: "commands.txt",
-          description: "Commands log file, in outdir",
-        },
-        {
-          name: "settings",
-          default: "settings.txt",
-          description: "Settings file, in outdir",
         },
         {
           name: "verbosity",
@@ -68,20 +63,19 @@ The gain file can either be in TIFF or MRC format. If it's in TIFF format, SNART
           type: Type.Bool,
         },
         {
+          name: "log",
+          default: "log-snartomo.txt",
+          description: "Output log file (not used in testing mode)",
+        },
+        {
           name: "max_minutes",
-          default: 100,
+          default: 600,
           description: "Maximum run time, minutes",
         },
-
         {
           name: "wait",
-          default: 2,
+          default: 4,
           description: "Interval to check for new micrographs, seconds",
-        },
-        {
-          name: "apix",
-          default: -1.0,
-          description: "Pixel size, Å/px",
         },
         {
           name: "kv",
