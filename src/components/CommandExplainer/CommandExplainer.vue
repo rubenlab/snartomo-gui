@@ -17,7 +17,7 @@ for (const g of props.groups) {
 }
 const map = reactive(_map);
 const state = reactive({
-  activeNames: ["Required"],
+  activeNames: ["REQUIRED SETTINGS"],
 });
 const command = computed(() => {
   let result = props.name;

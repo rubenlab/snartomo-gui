@@ -1,0 +1,260 @@
+REQUIRED SETTINGS
+          These files/directories are required.
+
+          --eer_dir
+              Description: Input EER directory
+              Type: DIR
+              Default: frames
+
+          --gain_file
+              Description: Input gain file
+              Type: ANY
+              Default:
+
+          --frame_file
+              Description: Input MotionCor2 frame file
+              Type: ANY
+              Default: motioncor-frame.txt
+
+        GLOBAL SETTINGS
+          These settings affect multiple steps.
+
+          --mdoc_file
+              Description: Input MDOC file
+              Type: ANY
+              Default: None
+
+          --apix
+              Description: Pixel size, A/px
+              Type: FLOAT
+              Default: -1.00
+
+          --outdir
+              Description: Output directory
+              Type: ANY
+              Default: SNARTomo
+
+          --verbosity
+              Description: Verbosity level (0..8) (3 or 2 recommended for testing mode)
+              Type: INT
+              Default: 4
+
+          --testing
+              Description: Testing flag
+              Type: BOOL
+              Default: false
+
+          --overwrite
+              Description: Flag to overwrite pre-existing output directory
+              Type: BOOL
+              Default: false
+
+          --log
+              Description: Output log file (not used in testing mode)
+              Type: ANY
+              Default: log-snartomo.txt
+
+          --max_minutes
+              Description: Maximum run time, minutes
+              Type: INT
+              Default: 600
+
+          --wait
+              Description: Interval to check for new micrographs, seconds
+              Type: INT
+              Default: 4
+
+          --kv
+              Description: Voltage, kV
+              Type: FLOAT
+              Default: 300.0
+
+          --gpus
+              Description: GPUs to use (space-delimited if more than one)
+              Type: ANY
+              Default: 3
+
+        MOTIONCOR2 SETTINGS
+          Settings for motion-correction.
+
+          --motioncor_exe
+              Description: MotionCor2 executable
+              Type: ANY
+              Default: /home/rubsak-admin/local/motioncor/MotionCor2
+
+          --patch
+              Description: Number of patches in x y, delimited by spaces
+              Type: ANY
+              Default: 0 0
+
+          --reffrm
+              Description: Reference frame (0: first, 1: middle)
+              Type: INT
+              Default: 1
+
+          --split_sum
+              Description: Split frames into even & odd half-sets (0: no, 1: yes)
+              Type: INT
+              Default: 0
+
+          --min_frames
+              Description: Minimum number of EER frames before warning
+              Type: INT
+              Default: 400
+
+          --max_frames
+              Description: Maximum number of EER frames before warning
+              Type: INT
+              Default: 1200
+
+        CTFFIND4 SETTINGS
+          Settings for CTF estimation.
+
+          --ctffind_dir
+              Description: CTFFIND executable directory
+              Type: ANY
+              Default: /home/rubsak-admin/local/ctffind/4.1.14/bin
+
+          --cs
+              Description: Spherical aberration constant (F20: 2.0, Krios: 2.7)
+              Type: FLOAT
+              Default: 2.7
+
+          --ac
+              Description: Amplitude contrast (0.07-0.1 for cryo data, 0.14-0.2 for neg.stain data)
+              Type: FLOAT
+              Default: 0.07
+
+          --box
+              Description: Tile size for power-spectrum calculation
+              Type: INT
+              Default: 512
+
+          --res_lo
+              Description: Low-resolution limit for CTF fitting, Angstroms
+              Type: FLOAT
+              Default: 30.0
+
+          --res_hi
+              Description: High-resolution limit for CTF fitting, Angstroms
+              Type: FLOAT
+              Default: 9.0
+
+          --df_lo
+              Description: Minimum defocus value to consider during fitting, Angstroms
+              Type: FLOAT
+              Default: 30000.0
+
+          --df_hi
+              Description: Maximum defocus value to consider during fitting, Angstroms
+              Type: FLOAT
+              Default: 70000.0
+
+          --df_step
+              Description: Defocus search step during fitting, Angstroms
+              Type: FLOAT
+              Default: 500.0
+
+          --ast_step
+              Description: Astigmatism search step during fitting, Angstroms
+              Type: FLOAT
+              Default: 100.0
+
+        TOPAZ SETTINGS
+          Settings for denoising.
+
+          --do_topaz
+              Description: Denoise micrographs using Topaz
+              Type: BOOL
+              Default: false
+
+          --topaz_exe
+              Description: Topaz executable
+              Type: ANY
+              Default: /home/rubsak-admin/local/miniconda3/4.10.3/envs/topaz/bin/topaz
+
+          --topaz_patch
+              Description: Patch size for Topaz denoising
+              Type: INT
+              Default: 2048
+
+          --topaz_env
+              Description: Topaz conda environment
+              Type: ANY
+              Default: topaz
+
+        IMOD SETTINGS
+          Settings for IMOD: restacking and optional eTomo reconstruction.
+
+          --imod_dir
+              Description: IMOD executable directory
+              Type: ANY
+              Default: /usr/local/IMOD/bin
+
+          --do_etomo
+              Description: Compute reconstruction using IMOD
+              Type: BOOL
+              Default: false
+
+          --batch_directive
+              Description: IMOD eTomo batch directive file
+              Type: ANY
+              Default: batchDirective.adoc
+
+        ARETOMO SETTINGS
+          Reconstruction will be computed either with AreTomo (default) or IMOD.
+
+          --aretomo_exe
+              Description: AreTomo executable
+              Type: ANY
+              Default: /home/rubsak-admin/local/aretomo/AreTomo_1.0.1-04-03-2021/AreTomo_1.0.1-Cuda111
+
+          --bin
+              Description: Binning factor for reconstruction
+              Type: INT
+              Default: 8
+
+          --vol_zdim
+              Description: z-dimension for volume
+              Type: INT
+              Default: 1600
+
+          --rec_zdim
+              Description: z-dimension for 3D reconstruction
+              Type: INT
+              Default: 1000
+
+          --tilt_cor
+              Description: Tilt-correction flag (1: yes, 0: no)
+              Type: INT
+              Default: 1
+
+          --bp_method
+              Description: Reconstruction method (1: weighted backprojection, 0: SART)
+              Type: INT
+              Default: 1
+
+          --tilt_axis
+              Description: Estimate for tilt-axis direction, degrees
+              Type: FLOAT
+              Default: 86.0
+
+          --flip_vol
+              Description: Flag to flip coordinates axes (1: yes, 0: no)
+              Type: INT
+              Default: 1
+
+          --transfile
+              Description: Flag to generate IMOD XF files (1: yes, 0: no)
+              Type: INT
+              Default: 1
+
+          --are_patches
+              Description: Number of patches in x & y (delimited by spaces)
+              Type: ANY
+              Default: 0 0
+
+          --are_time
+              Description: Maximum duration (AreTomo sometimes hangs)
+              Type: ANY
+              Default: 30m
