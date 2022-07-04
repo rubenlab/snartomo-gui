@@ -1,20 +1,20 @@
-REQUIRED SETTINGS
+        REQUIRED SETTINGS
           These files/directories are required.
 
           --target_file
               Description: PACE targets file
               Type: FILE
-              Default:
+              Default: 
 
           --gain_file
               Description: Input gain file
               Type: ANY
-              Default:
+              Default: 
 
           --last_tilt
               Description: Last (not highest) tilt angle in tilt series
               Type: FLOAT
-              Default:
+              Default: 
 
         GLOBAL SETTINGS
           These settings affect multiple steps.
@@ -227,7 +227,7 @@ REQUIRED SETTINGS
           --aretomo_exe
               Description: AreTomo executable
               Type: ANY
-              Default: /home/rubsak-admin/local/aretomo/AreTomo_1.0.1-04-03-2021/AreTomo_1.0.1-Cuda111
+              Default: /home/rubsak-admin/local/aretomo/1.2.0/AreTomo_1.2.0_Cuda112_06-23-2022
 
           --bin
               Description: Binning factor for reconstruction
