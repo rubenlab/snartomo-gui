@@ -1,4 +1,4 @@
-        REQUIRED SETTINGS
+REQUIRED SETTINGS
           These files/directories are required.
 
           --eer_dir
@@ -9,7 +9,7 @@
           --gain_file
               Description: Input gain file
               Type: ANY
-              Default: 
+              Default:
 
           --frame_file
               Description: Input MotionCor2 frame file
@@ -207,7 +207,7 @@
           --aretomo_exe
               Description: AreTomo executable
               Type: ANY
-              Default: /home/rubsak-admin/local/aretomo/1.2.0/AreTomo_1.2.0_Cuda112_06-23-2022
+              Default: /home/rubsak-admin/local/aretomo/AreTomo_1.0.1-04-03-2021/AreTomo_1.0.1-Cuda111
 
           --bin
               Description: Binning factor for reconstruction

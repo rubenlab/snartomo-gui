@@ -47,6 +47,9 @@ function parseCommand(help: string, name: string): Command {
       i++; // skip the next group description line
     }
   }
+  if (currGrp != null) {
+    cmd.groups.push(currGrp);
+  }
   return cmd;
 }
 
