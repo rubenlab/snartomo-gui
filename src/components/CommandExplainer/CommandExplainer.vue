@@ -27,6 +27,9 @@ const command = computed(() => {
       value = value.trim();
     }
     if (value != null && value !== "") {
+      if (value.indexOf(" ") >= 0 && !value.startsWith('"')) {
+        value = '"' + value + '"';
+      }
       result += ` --${key} ${value}`;
     }
   }

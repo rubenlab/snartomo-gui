@@ -9,7 +9,7 @@ REQUIRED SETTINGS
           --gain_file
               Description: Input gain file
               Type: ANY
-              Default: 
+              Default:
 
           --frame_file
               Description: Input MotionCor2 frame file

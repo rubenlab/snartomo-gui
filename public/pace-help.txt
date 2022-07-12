@@ -4,17 +4,17 @@ REQUIRED SETTINGS
           --target_file
               Description: PACE targets file
               Type: FILE
-              Default: 
+              Default:
 
           --gain_file
               Description: Input gain file
               Type: ANY
-              Default: 
+              Default:
 
           --last_tilt
               Description: Last (not highest) tilt angle in tilt series
               Type: FLOAT
-              Default: 
+              Default:
 
         GLOBAL SETTINGS
           These settings affect multiple steps.
