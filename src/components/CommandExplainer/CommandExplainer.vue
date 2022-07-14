@@ -78,15 +78,6 @@ const setCollapse = (key: string, arr: Array<string>) => {
               placeholder="Select"
               clearable
             >
-              <el-option label="True" value="true" />
-              <el-option label="False" value="false" />
-            </el-select>
-            <el-select
-              v-else-if="argument.type === 'bool-omit'"
-              v-model="map[argument.name]"
-              placeholder="Select"
-              clearable
-            >
               <el-option label="True" :value="true" />
               <el-option label="False" :value="false" />
             </el-select>
