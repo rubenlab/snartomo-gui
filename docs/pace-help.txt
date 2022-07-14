@@ -51,7 +51,7 @@ REQUIRED SETTINGS
 
           --testing
               Description: Testing flag
-              Type: BOOL
+              Type: BOOL-OMIT
               Default: false
 
           --slow

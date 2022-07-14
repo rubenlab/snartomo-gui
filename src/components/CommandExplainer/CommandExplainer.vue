@@ -23,6 +23,12 @@ const command = computed(() => {
   let result = props.name;
   for (const key in map) {
     let value = map[key];
+    if (value === true || value === false) {
+      if (value) {
+        result += ` --${key}`;
+      }
+      continue;
+    }
     if (value != null) {
       value = value.trim();
     }
@@ -74,6 +80,15 @@ const setCollapse = (key: string, arr: Array<string>) => {
             >
               <el-option label="True" value="true" />
               <el-option label="False" value="false" />
+            </el-select>
+            <el-select
+              v-else-if="argument.type === 'bool-omit'"
+              v-model="map[argument.name]"
+              placeholder="Select"
+              clearable
+            >
+              <el-option label="True" :value="true" />
+              <el-option label="False" :value="false" />
             </el-select>
             <el-input
               v-else
