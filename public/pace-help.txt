@@ -11,11 +11,6 @@ REQUIRED SETTINGS
               Type: ANY
               Default: 
 
-          --last_tilt
-              Description: Last (not highest) tilt angle in tilt series
-              Type: FLOAT
-              Default: 
-
         GLOBAL SETTINGS
           These settings affect multiple steps.
 
@@ -28,6 +23,16 @@ REQUIRED SETTINGS
               Description: Input MotionCor2 frame file
               Type: ANY
               Default: motioncor-frame.txt
+
+          --last_tilt
+              Description: Last (not highest) tilt angle in tilt series
+              Type: FLOAT
+              Default: -999.9
+
+          --live
+              Description: Flag to detect new files on-the-fly
+              Type: BOOL
+              Default: false
 
           --tilt_tolerance
               Description: Angle difference of last tilt +/- this value will signal end of series
@@ -293,7 +298,7 @@ REQUIRED SETTINGS
           --aretomo_exe
               Description: AreTomo executable
               Type: ANY
-              Default: /home/rubsak-admin/local/aretomo/1.2.0/AreTomo_1.2.0_Cuda112_06-23-2022
+              Default: /home/rubsak-admin/local/aretomo/1.2.5/AreTomo_1.2.5_Cuda112_08-01-2022
 
           --bin
               Description: Binning factor for reconstruction
