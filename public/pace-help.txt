@@ -1,9 +1,9 @@
-REQUIRED SETTINGS
+        REQUIRED SETTINGS
           These files/directories are required.
 
-          --target_file
-              Description: PACE targets file
-              Type: FILE
+          --target_files
+              Description: PACE target files (more than one -> must be enclosed in quotes)
+              Type: ANY
               Default: 
 
           --gain_file
@@ -24,15 +24,15 @@ REQUIRED SETTINGS
               Type: ANY
               Default: motioncor-frame.txt
 
-          --last_tilt
-              Description: Last (not highest) tilt angle in tilt series
-              Type: FLOAT
-              Default: -999.9
-
           --live
               Description: Flag to detect new files on-the-fly
               Type: BOOL
               Default: false
+
+          --last_tilt
+              Description: Last (not highest) tilt angle in tilt series (required in live mode)
+              Type: FLOAT
+              Default: -999.9
 
           --tilt_tolerance
               Description: Angle difference of last tilt +/- this value will signal end of series
@@ -79,11 +79,6 @@ REQUIRED SETTINGS
               Type: INT
               Default: 100
 
-          --cpu_slots
-              Description: Maximum number of CPU processes to run concurrently
-              Type: INT
-              Default: 2
-
           --wait
               Description: Interval to check for files and resources, seconds
               Type: INT
@@ -97,7 +92,7 @@ REQUIRED SETTINGS
           --gpus
               Description: GPUs to use (surrounding quotes & space-delimited if more than one)
               Type: ANY
-              Default: 1 2 3
+              Default: 2 3
 
         MOTIONCOR2 SETTINGS
           Settings for motion-correction.
@@ -155,6 +150,11 @@ REQUIRED SETTINGS
               Type: ANY
               Default: /home/rubsak-admin/local/ctffind/4.1.14/bin
 
+          --ctf_slots
+              Description: Maximum number of CTFFIND4 processes to run concurrently
+              Type: INT
+              Default: 2
+
           --cs
               Description: Spherical aberration constant (F20: 2.0, Krios: 2.7)
               Type: FLOAT
@@ -208,30 +208,30 @@ REQUIRED SETTINGS
               Type: BOOL
               Default: false
 
-          --janni_overlap
-              Description: Overlap between patches, pixels
-              Type: INT
-              Default: 24
-
-          --janni_batch
-              Description: Number of patches predicted in parallel
-              Type: INT
-              Default: 4
-
-          --janni_model
-              Description: JANNI general model
+          --janni_env
+              Description: JANNI conda environment
               Type: ANY
-              Default: /home/rubsak-admin/local/janni/gmodel_janni_20190703.h5
+              Default: janni_cpu
 
           --janni_exe
               Description: JANNI executable
               Type: ANY
               Default: /home/rubsak-admin/local/miniconda3/4.10.3/envs/janni/bin/janni_denoise.py
 
-          --janni_env
-              Description: JANNI conda environment
+          --janni_model
+              Description: JANNI general model
               Type: ANY
-              Default: janni_cpu
+              Default: /home/rubsak-admin/local/janni/gmodel_janni_20190703.h5
+
+          --janni_batch
+              Description: Number of patches predicted in parallel
+              Type: INT
+              Default: 4
+
+          --janni_overlap
+              Description: Overlap between patches, pixels
+              Type: INT
+              Default: 24
 
         TOPAZ SETTINGS
           Settings for Topaz denoise.
@@ -256,7 +256,7 @@ REQUIRED SETTINGS
               Type: ANY
               Default: topaz
 
-        DoseDiscriminator SETTINGS
+        DOSEDISCRIMINATOR SETTINGS
           Settings for dose-fitting.
 
           --dosefit_min
@@ -291,6 +291,24 @@ REQUIRED SETTINGS
               Description: IMOD eTomo batch directive file
               Type: ANY
               Default: batchDirective.adoc
+
+          --imod_slots
+              Description: Maximum number of IMOD reconstructions to run concurrently
+              Type: INT
+              Default: 2
+
+        RUOTNOCON SETTINGS
+          Settings for contour removal.
+
+          --do_ruotnocon
+              Description: Remove contours based on residual
+              Type: BOOL
+              Default: false
+
+          --ruotnocon_sd
+              Description: Contours with residuals greater than this multiple of sigma will be removed
+              Type: FLOAT
+              Default: 3.0
 
         ARETOMO SETTINGS
           Reconstruction will be computed either with AreTomo (default) or IMOD.
