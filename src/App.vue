@@ -20,6 +20,7 @@ const handleClick = (tab: TabsPaneContext, event: Event) => {
     >
       <el-tab-pane label="PACE" name="/"></el-tab-pane>
       <el-tab-pane label="Classic" name="/classic"></el-tab-pane>
+      <el-tab-pane label="FrameCalc" name="/framecalc"></el-tab-pane>
     </el-tabs>
   </el-header>
   <el-main>

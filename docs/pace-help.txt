@@ -1,20 +1,15 @@
-REQUIRED SETTINGS
+        REQUIRED SETTINGS
           These files/directories are required.
 
-          --target_file
-              Description: PACE targets file
-              Type: FILE
-              Default:
+          --target_files
+              Description: PACE target files (more than one -> must be enclosed in quotes)
+              Type: ANY
+              Default: 
 
           --gain_file
               Description: Input gain file
               Type: ANY
-              Default:
-
-          --last_tilt
-              Description: Last (not highest) tilt angle in tilt series
-              Type: FLOAT
-              Default:
+              Default: 
 
         GLOBAL SETTINGS
           These settings affect multiple steps.
@@ -28,6 +23,16 @@ REQUIRED SETTINGS
               Description: Input MotionCor2 frame file
               Type: ANY
               Default: motioncor-frame.txt
+
+          --live
+              Description: Flag to detect new files on-the-fly
+              Type: BOOL
+              Default: false
+
+          --last_tilt
+              Description: Last (not highest) tilt angle in tilt series (required in live mode)
+              Type: FLOAT
+              Default: -999.9
 
           --tilt_tolerance
               Description: Angle difference of last tilt +/- this value will signal end of series
@@ -74,11 +79,6 @@ REQUIRED SETTINGS
               Type: INT
               Default: 100
 
-          --cpu_slots
-              Description: Maximum number of CPU processes to run concurrently
-              Type: INT
-              Default: 2
-
           --wait
               Description: Interval to check for files and resources, seconds
               Type: INT
@@ -90,9 +90,9 @@ REQUIRED SETTINGS
               Default: 300.0
 
           --gpus
-              Description: GPUs to use (space-delimited if more than one)
+              Description: GPUs to use (surrounding quotes & space-delimited if more than one)
               Type: ANY
-              Default: 1 2 3
+              Default: 2 3
 
         MOTIONCOR2 SETTINGS
           Settings for motion-correction.
@@ -102,20 +102,35 @@ REQUIRED SETTINGS
               Type: ANY
               Default: /home/rubsak-admin/local/motioncor/MotionCor2
 
+          --do_dosewt
+              Description: Flag to perform dose-weighting
+              Type: BOOL
+              Default: false
+
           --mcor_patches
-              Description: Number of patches in x y, delimited by spaces
+              Description: Number of patches in x y, surrounding quotes & delimited by spaces
               Type: ANY
               Default: 0 0
+
+          --do_outstack
+              Description: Flag to write aligned stacks
+              Type: BOOL
+              Default: false
+
+          --do_splitsum
+              Description: Flag to split frames into even & odd half-sets
+              Type: BOOL
+              Default: false
+
+          --split_sum
+              Description: (DEPRECATED) Split frames into even & odd half-sets (0: no, 1: yes)
+              Type: INT
+              Default: 0
 
           --reffrm
               Description: Reference frame (0: first, 1: middle)
               Type: INT
               Default: 1
-
-          --split_sum
-              Description: Split frames into even & odd half-sets (0: no, 1: yes)
-              Type: INT
-              Default: 0
 
           --min_frames
               Description: Minimum number of EER frames before warning
@@ -134,6 +149,11 @@ REQUIRED SETTINGS
               Description: CTFFIND executable directory
               Type: ANY
               Default: /home/rubsak-admin/local/ctffind/4.1.14/bin
+
+          --ctf_slots
+              Description: Maximum number of CTFFIND4 processes to run concurrently
+              Type: INT
+              Default: 2
 
           --cs
               Description: Spherical aberration constant (F20: 2.0, Krios: 2.7)
@@ -180,8 +200,41 @@ REQUIRED SETTINGS
               Type: FLOAT
               Default: 100.0
 
+        JANNI SETTINGS
+          Settings for JANNI denoise.
+
+          --do_janni
+              Description: Denoise micrographs using JANNI
+              Type: BOOL
+              Default: false
+
+          --janni_env
+              Description: JANNI conda environment
+              Type: ANY
+              Default: janni_cpu
+
+          --janni_exe
+              Description: JANNI executable
+              Type: ANY
+              Default: /home/rubsak-admin/local/miniconda3/4.10.3/envs/janni/bin/janni_denoise.py
+
+          --janni_model
+              Description: JANNI general model
+              Type: ANY
+              Default: /home/rubsak-admin/local/janni/gmodel_janni_20190703.h5
+
+          --janni_batch
+              Description: Number of patches predicted in parallel
+              Type: INT
+              Default: 4
+
+          --janni_overlap
+              Description: Overlap between patches, pixels
+              Type: INT
+              Default: 24
+
         TOPAZ SETTINGS
-          Settings for denoising.
+          Settings for Topaz denoise.
 
           --do_topaz
               Description: Denoise micrographs using Topaz
@@ -203,6 +256,24 @@ REQUIRED SETTINGS
               Type: ANY
               Default: topaz
 
+        DOSEDISCRIMINATOR SETTINGS
+          Settings for dose-fitting.
+
+          --dosefit_min
+              Description: Minimum dose rate allowed, as a fraction of maximum dose rate
+              Type: FLOAT
+              Default: 0.1
+
+          --dosefit_resid
+              Description: Maximum residual during dose-fitting, as a fraction of maximum dose rate
+              Type: FLOAT
+              Default: 0.1
+
+          --dosefit_verbose
+              Description: Verbosity level for dose-fitting log file (0..8)
+              Type: ANY
+              Default: 6
+
         IMOD SETTINGS
           Settings for IMOD: restacking and optional eTomo reconstruction.
 
@@ -221,13 +292,31 @@ REQUIRED SETTINGS
               Type: ANY
               Default: batchDirective.adoc
 
+          --imod_slots
+              Description: Maximum number of IMOD reconstructions to run concurrently
+              Type: INT
+              Default: 2
+
+        RUOTNOCON SETTINGS
+          Settings for contour removal.
+
+          --do_ruotnocon
+              Description: Remove contours based on residual
+              Type: BOOL
+              Default: false
+
+          --ruotnocon_sd
+              Description: Contours with residuals greater than this multiple of sigma will be removed
+              Type: FLOAT
+              Default: 3.0
+
         ARETOMO SETTINGS
           Reconstruction will be computed either with AreTomo (default) or IMOD.
 
           --aretomo_exe
               Description: AreTomo executable
               Type: ANY
-              Default: /home/rubsak-admin/local/aretomo/1.2.0/AreTomo_1.2.0_Cuda112_06-23-2022
+              Default: /home/rubsak-admin/local/aretomo/1.2.5/AreTomo_1.2.5_Cuda112_08-01-2022
 
           --bin
               Description: Binning factor for reconstruction
@@ -244,6 +333,16 @@ REQUIRED SETTINGS
               Type: INT
               Default: 1000
 
+          --tilt_axis
+              Description: Estimate for tilt-axis direction, degrees
+              Type: FLOAT
+              Default: 86.0
+
+          --dark_tol
+              Description: Tolerance for dark images (0.0-1.0)
+              Type: FLOAT
+              Default: 0.7
+
           --tilt_cor
               Description: Tilt-correction flag (1: yes, 0: no)
               Type: INT
@@ -253,11 +352,6 @@ REQUIRED SETTINGS
               Description: Reconstruction method (1: weighted backprojection, 0: SART)
               Type: INT
               Default: 1
-
-          --tilt_axis
-              Description: Estimate for tilt-axis direction, degrees
-              Type: FLOAT
-              Default: 86.0
 
           --flip_vol
               Description: Flag to flip coordinates axes (1: yes, 0: no)
@@ -270,7 +364,7 @@ REQUIRED SETTINGS
               Default: 1
 
           --are_patches
-              Description: Number of patches in x & y (delimited by spaces)
+              Description: Number of patches in x & y (surrounding quotes & delimited by spaces)
               Type: ANY
               Default: 0 0
 

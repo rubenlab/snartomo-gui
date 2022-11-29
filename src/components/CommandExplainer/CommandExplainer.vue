@@ -16,8 +16,10 @@ for (const g of props.groups) {
   }
 }
 const map = reactive(_map);
+const defaultActiveName =
+  props.groups.length > 0 ? props.groups[0].name : "REQUIRED SETTINGS";
 const state = reactive({
-  activeNames: ["REQUIRED SETTINGS"],
+  activeNames: [defaultActiveName],
 });
 const command = computed(() => {
   let result = props.name;

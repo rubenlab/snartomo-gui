@@ -9,7 +9,7 @@ REQUIRED SETTINGS
           --gain_file
               Description: Input gain file
               Type: ANY
-              Default:
+              Default: 
 
           --frame_file
               Description: Input MotionCor2 frame file
@@ -49,6 +49,11 @@ REQUIRED SETTINGS
               Type: BOOL
               Default: false
 
+          --debug
+              Description: Flag for debugging
+              Type: BOOL
+              Default: false
+
           --log
               Description: Output log file (not used in testing mode)
               Type: ANY
@@ -82,20 +87,35 @@ REQUIRED SETTINGS
               Type: ANY
               Default: /home/rubsak-admin/local/motioncor/MotionCor2
 
+          --do_dosewt
+              Description: Flag to perform dose-weighting
+              Type: BOOL
+              Default: false
+
           --mcor_patches
               Description: Number of patches in x y, delimited by spaces
               Type: ANY
               Default: 0 0
 
+          --do_outstack
+              Description: Flag to write aligned stacks
+              Type: BOOL
+              Default: false
+
+          --do_splitsum
+              Description: Flag to split frames into even & odd half-sets
+              Type: BOOL
+              Default: false
+
+          --split_sum
+              Description: (DEPRECATED) Split frames into even & odd half-sets (0: no, 1: yes)
+              Type: INT
+              Default: 0
+
           --reffrm
               Description: Reference frame (0: first, 1: middle)
               Type: INT
               Default: 1
-
-          --split_sum
-              Description: Split frames into even & odd half-sets (0: no, 1: yes)
-              Type: INT
-              Default: 0
 
           --min_frames
               Description: Minimum number of EER frames before warning
@@ -207,7 +227,7 @@ REQUIRED SETTINGS
           --aretomo_exe
               Description: AreTomo executable
               Type: ANY
-              Default: /home/rubsak-admin/local/aretomo/1.2.0/AreTomo_1.2.0_Cuda112_06-23-2022
+              Default: /home/rubsak-admin/local/aretomo/1.2.5/AreTomo_1.2.5_Cuda112_08-01-2022
 
           --bin
               Description: Binning factor for reconstruction
@@ -224,6 +244,16 @@ REQUIRED SETTINGS
               Type: INT
               Default: 1000
 
+          --tilt_axis
+              Description: Estimate for tilt-axis direction, degrees
+              Type: FLOAT
+              Default: 86.0
+
+          --dark_tol
+              Description: Tolerance for dark images (0.0-1.0)
+              Type: FLOAT
+              Default: 0.7
+
           --tilt_cor
               Description: Tilt-correction flag (1: yes, 0: no)
               Type: INT
@@ -233,11 +263,6 @@ REQUIRED SETTINGS
               Description: Reconstruction method (1: weighted backprojection, 0: SART)
               Type: INT
               Default: 1
-
-          --tilt_axis
-              Description: Estimate for tilt-axis direction, degrees
-              Type: FLOAT
-              Default: 86.0
 
           --flip_vol
               Description: Flag to flip coordinates axes (1: yes, 0: no)
