@@ -1,4 +1,4 @@
-REQUIRED SETTINGS
+        REQUIRED SETTINGS
           These files/directories are required.
 
           --eer_dir
@@ -15,6 +15,11 @@ REQUIRED SETTINGS
               Description: Input MotionCor2 frame file
               Type: ANY
               Default: motioncor-frame.txt
+
+          --mdoc_dir
+              Description: Tilt-series MDOC directory
+              Type: ANY
+              Default: 
 
         GLOBAL SETTINGS
           These settings affect multiple steps.
@@ -39,6 +44,11 @@ REQUIRED SETTINGS
               Type: INT
               Default: 4
 
+          --restore_movies
+              Description: Move already-processed movies from output directory to input directory
+              Type: BOOL
+              Default: false
+
           --testing
               Description: Testing flag
               Type: BOOL
@@ -46,11 +56,6 @@ REQUIRED SETTINGS
 
           --overwrite
               Description: Flag to overwrite pre-existing output directory
-              Type: BOOL
-              Default: false
-
-          --debug
-              Description: Flag for debugging
               Type: BOOL
               Default: false
 
@@ -64,11 +69,6 @@ REQUIRED SETTINGS
               Type: INT
               Default: 600
 
-          --wait
-              Description: Interval to check for new micrographs, seconds
-              Type: INT
-              Default: 4
-
           --kv
               Description: Voltage, kV
               Type: FLOAT
@@ -77,7 +77,40 @@ REQUIRED SETTINGS
           --gpus
               Description: GPUs to use (space-delimited if more than one)
               Type: ANY
-              Default: 3
+              Default: 0
+
+        ADVANCED SETTINGS
+          These settings will rarely need to be changed.
+
+          --search_interval
+              Description: Interval to check for new micrographs, seconds
+              Type: INT
+              Default: 4
+
+          --min_frames
+              Description: Minimum number of EER frames before warning
+              Type: INT
+              Default: 400
+
+          --max_frames
+              Description: Maximum number of EER frames before warning
+              Type: INT
+              Default: 1200
+
+          --eer_local
+              Description: Flag to copy EER files locally temporarily
+              Type: BOOL
+              Default: 
+
+          --eer_latency
+              Description: Maximum header read time before microgrpah is copied locally
+              Type: FLOAT
+              Default: 7
+
+          --debug
+              Description: Flag for debugging
+              Type: BOOL
+              Default: false
 
         MOTIONCOR2 SETTINGS
           Settings for motion-correction.
@@ -85,7 +118,7 @@ REQUIRED SETTINGS
           --motioncor_exe
               Description: MotionCor2 executable
               Type: ANY
-              Default: /home/rubsak-admin/local/motioncor/MotionCor2
+              Default: 
 
           --do_dosewt
               Description: Flag to perform dose-weighting
@@ -117,15 +150,10 @@ REQUIRED SETTINGS
               Type: INT
               Default: 1
 
-          --min_frames
-              Description: Minimum number of EER frames before warning
-              Type: INT
-              Default: 400
-
-          --max_frames
-              Description: Maximum number of EER frames before warning
-              Type: INT
-              Default: 1200
+          --mc2_wait
+              Description: Maximum wait (seconds) for competing user's MotionCor2_FreeGpus.txt file to be deleted
+              Type: FLOAT
+              Default: 120.0
 
         CTFFIND4 SETTINGS
           Settings for CTF estimation.
@@ -133,7 +161,7 @@ REQUIRED SETTINGS
           --ctffind_dir
               Description: CTFFIND executable directory
               Type: ANY
-              Default: /home/rubsak-admin/local/ctffind/4.1.14/bin
+              Default: 
 
           --cs
               Description: Spherical aberration constant (F20: 2.0, Krios: 2.7)
@@ -180,6 +208,24 @@ REQUIRED SETTINGS
               Type: FLOAT
               Default: 100.0
 
+        JANNI SETTINGS
+          Settings for JANNI denoise.
+
+          --do_janni
+              Description: Denoise micrographs using JANNI
+              Type: BOOL
+              Default: false
+
+          --janni_batch
+              Description: Number of patches predicted in parallel
+              Type: INT
+              Default: 4
+
+          --janni_overlap
+              Description: Overlap between patches, pixels
+              Type: INT
+              Default: 24
+
         TOPAZ SETTINGS
           Settings for denoising.
 
@@ -187,11 +233,6 @@ REQUIRED SETTINGS
               Description: Denoise micrographs using Topaz
               Type: BOOL
               Default: false
-
-          --topaz_exe
-              Description: Topaz executable
-              Type: ANY
-              Default: /home/rubsak-admin/local/miniconda3/4.10.3/envs/topaz/bin/topaz
 
           --topaz_patch
               Description: Patch size for Topaz denoising
@@ -201,7 +242,7 @@ REQUIRED SETTINGS
           --topaz_env
               Description: Topaz conda environment
               Type: ANY
-              Default: topaz
+              Default: 
 
         IMOD SETTINGS
           Settings for IMOD: restacking and optional eTomo reconstruction.
@@ -209,7 +250,7 @@ REQUIRED SETTINGS
           --imod_dir
               Description: IMOD executable directory
               Type: ANY
-              Default: /usr/local/IMOD/bin
+              Default: 
 
           --do_etomo
               Description: Compute reconstruction using IMOD
@@ -227,7 +268,7 @@ REQUIRED SETTINGS
           --aretomo_exe
               Description: AreTomo executable
               Type: ANY
-              Default: /home/rubsak-admin/local/aretomo/1.2.5/AreTomo_1.2.5_Cuda112_08-01-2022
+              Default: 
 
           --bin
               Description: Binning factor for reconstruction
