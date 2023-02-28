@@ -1,31 +1,36 @@
-        REQUIRED SETTINGS
-          These files/directories are required.
+        INPUT MOVIE SETTINGS
+          One of these directories is required.
 
           --eer_dir
               Description: Input EER directory
-              Type: DIR
-              Default: frames
-
-          --gain_file
-              Description: Input gain file
               Type: ANY
               Default: 
 
-          --frame_file
-              Description: Input MotionCor2 frame file
+          --mrc_dir
+              Description: Input MRC movie stack directory
               Type: ANY
-              Default: motioncor-frame.txt
+              Default: 
 
-          --mdoc_dir
-              Description: Tilt-series MDOC directory
+          --tif_dir
+              Description: Input TIFF movie stack directory
               Type: ANY
               Default: 
 
         GLOBAL SETTINGS
           These settings affect multiple steps.
 
+          --outdir
+              Description: Output directory
+              Type: ANY
+              Default: SNARTomo
+
+          --mdoc_dir
+              Description: Input MDOC directory, will be copied to reconstruction directory
+              Type: ANY
+              Default: 
+
           --mdoc_file
-              Description: Input MDOC file
+              Description: Single input example MDOC file, to extract pixel size, etc.
               Type: ANY
               Default: None
 
@@ -33,11 +38,6 @@
               Description: Pixel size, A/px
               Type: FLOAT
               Default: -1.00
-
-          --outdir
-              Description: Output directory
-              Type: ANY
-              Default: SNARTomo
 
           --verbosity
               Description: Verbosity level (0..8) (3 or 2 recommended for testing mode)
@@ -75,7 +75,7 @@
               Default: 300.0
 
           --gpus
-              Description: GPUs to use (space-delimited if more than one)
+              Description: GPU to use (only single GPU supported in Classic mode)
               Type: ANY
               Default: 0
 
@@ -88,22 +88,22 @@
               Default: 4
 
           --min_frames
-              Description: Minimum number of EER frames before warning
+              Description: Minimum number of frames (EERs only) before warning
               Type: INT
               Default: 400
 
           --max_frames
-              Description: Maximum number of EER frames before warning
+              Description: Maximum number of frames (EERs only) before warning
               Type: INT
               Default: 1200
 
           --eer_local
-              Description: Flag to copy EER files locally temporarily
+              Description: Flag to temporarily copy EER files locally
               Type: BOOL
               Default: 
 
           --eer_latency
-              Description: Maximum header read time before microgrpah is copied locally
+              Description: Maximum header read time before micrograph is copied locally
               Type: FLOAT
               Default: 7
 
@@ -114,6 +114,21 @@
 
         MOTIONCOR2 SETTINGS
           Settings for motion-correction.
+
+          --frame_file
+              Description: Input MotionCor2 frame file
+              Type: ANY
+              Default: motioncor-frame.txt
+
+          --gain_file
+              Description: Input gain file
+              Type: ANY
+              Default: 
+
+          --no_gain
+              Description: Flag when no gain file is to be used
+              Type: BOOL
+              Default: false
 
           --motioncor_exe
               Description: MotionCor2 executable
@@ -211,11 +226,6 @@
         JANNI SETTINGS
           Settings for JANNI denoise.
 
-          --do_janni
-              Description: Denoise micrographs using JANNI
-              Type: BOOL
-              Default: false
-
           --janni_batch
               Description: Number of patches predicted in parallel
               Type: INT
@@ -225,6 +235,11 @@
               Description: Overlap between patches, pixels
               Type: INT
               Default: 24
+
+          --janni_env
+              Description: JANNI conda environment
+              Type: ANY
+              Default: 
 
         TOPAZ SETTINGS
           Settings for denoising.
@@ -252,15 +267,10 @@
               Type: ANY
               Default: 
 
-          --do_etomo
-              Description: Compute reconstruction using IMOD
-              Type: BOOL
-              Default: false
-
           --batch_directive
               Description: IMOD eTomo batch directive file
               Type: ANY
-              Default: batchDirective.adoc
+              Default: 
 
         ARETOMO SETTINGS
           Reconstruction will be computed either with AreTomo (default) or IMOD.
@@ -270,7 +280,7 @@
               Type: ANY
               Default: 
 
-          --bin
+          --are_bin
               Description: Binning factor for reconstruction
               Type: INT
               Default: 8
