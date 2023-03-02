@@ -1,8 +1,13 @@
-        REQUIRED SETTINGS
-          These files/directories are required.
+        SERIALEM SETTINGS
+          Either one or more target files, or an MDOC file, is required.
 
           --target_files
               Description: PACE target files (more than one -> must be enclosed in quotes)
+              Type: ANY
+              Default: 
+
+          --mdoc_file
+              Description: Single MDOC file
               Type: ANY
               Default: 
 
@@ -85,7 +90,7 @@
           --denoise_gpu
               Description: Flag to denoise using GPUs
               Type: BOOL
-              Default: 
+              Default: false
 
         ADVANCED SETTINGS
           These settings will rarely need to be changed.
@@ -118,7 +123,7 @@
           --eer_local
               Description: Flag to copy EER files locally temporarily
               Type: BOOL
-              Default: 
+              Default: $CP_EER_LOCAL
 
           --eer_latency
               Description: Maximum header read time before micrograph is copied locally
@@ -151,7 +156,7 @@
           --motioncor_exe
               Description: MotionCor2 executable
               Type: ANY
-              Default: 
+              Default: $MOTIONCOR2_EXE
 
           --do_dosewt
               Description: Flag to perform dose-weighting
@@ -204,7 +209,7 @@
           --ctffind_dir
               Description: CTFFIND executable directory
               Type: ANY
-              Default: 
+              Default: $CTFFIND4_BIN
 
           --ctf_slots
               Description: Maximum number of CTFFIND4 processes to run concurrently
@@ -272,12 +277,12 @@
           --janni_model
               Description: JANNI 'h5' model file
               Type: ANY
-              Default: 
+              Default: $JANNI_MODEL
 
           --janni_env
               Description: JANNI conda environment
               Type: ANY
-              Default: 
+              Default: $JANNI_ENV
 
         TOPAZ SETTINGS
           Settings for Topaz denoise.
@@ -290,7 +295,7 @@
           --topaz_env
               Description: Topaz conda environment
               Type: ANY
-              Default: 
+              Default: $TOPAZ_ENV
 
         DOSEDISCRIMINATOR SETTINGS
           Settings for dose-fitting.
@@ -326,7 +331,7 @@
           --imod_dir
               Description: IMOD executable directory
               Type: ANY
-              Default: 
+              Default: $IMOD_BIN
 
         RUOTNOCON SETTINGS
           Settings for contour removal in IMOD reconstruction.
@@ -402,4 +407,4 @@
           --aretomo_exe
               Description: AreTomo executable
               Type: ANY
-              Default: 
+              Default: $ARETOMO_EXE
