@@ -79,6 +79,16 @@
               Type: ANY
               Default: 0
 
+          --no_redo3d
+              Description: Flag to NOT overwrite pre-existing 3D reconstructions
+              Type: BOOL
+              Default: false
+
+          --denoise_gpu
+              Description: Flag to denoise using GPUs
+              Type: BOOL
+              Default: false
+
         ADVANCED SETTINGS
           These settings will rarely need to be changed.
 
@@ -97,10 +107,15 @@
               Type: INT
               Default: 1200
 
+          --temp_local
+              Description: Directory to copy EER files locally
+              Type: ANY
+              Default: 
+
           --eer_local
               Description: Flag to temporarily copy EER files locally
               Type: BOOL
-              Default: 
+              Default: false
 
           --eer_latency
               Description: Maximum header read time before micrograph is copied locally
@@ -133,7 +148,7 @@
           --motioncor_exe
               Description: MotionCor2 executable
               Type: ANY
-              Default: 
+              Default: /home/rubsak-admin/local/motioncor/1.6.3/MotionCor2_1.6.3_Cuda112_Feb18_2023
 
           --do_dosewt
               Description: Flag to perform dose-weighting
@@ -176,7 +191,7 @@
           --ctffind_dir
               Description: CTFFIND executable directory
               Type: ANY
-              Default: 
+              Default: /home/rubsak-admin/local/ctffind/4.1.14/bin
 
           --cs
               Description: Spherical aberration constant (F20: 2.0, Krios: 2.7)
@@ -226,6 +241,16 @@
         JANNI SETTINGS
           Settings for JANNI denoise.
 
+          --do_janni
+              Description: Denoise micrographs using JANNI
+              Type: BOOL
+              Default: false
+
+          --janni_model
+              Description: JANNI 'h5' model file
+              Type: ANY
+              Default: /home/rubsak-admin/local/janni/gmodel_janni_20190703.h5
+
           --janni_batch
               Description: Number of patches predicted in parallel
               Type: INT
@@ -239,7 +264,7 @@
           --janni_env
               Description: JANNI conda environment
               Type: ANY
-              Default: 
+              Default: janni_cpu
 
         TOPAZ SETTINGS
           Settings for denoising.
@@ -254,10 +279,15 @@
               Type: INT
               Default: 2048
 
+          --topaz_time
+              Description: Maximum duration, Topaz sometimes hangs
+              Type: ANY
+              Default: 2h
+
           --topaz_env
               Description: Topaz conda environment
               Type: ANY
-              Default: 
+              Default: topaz
 
         IMOD SETTINGS
           Settings for IMOD: restacking and optional eTomo reconstruction.
@@ -265,7 +295,7 @@
           --imod_dir
               Description: IMOD executable directory
               Type: ANY
-              Default: 
+              Default: /usr/local/IMOD/bin
 
           --batch_directive
               Description: IMOD eTomo batch directive file
@@ -278,7 +308,7 @@
           --aretomo_exe
               Description: AreTomo executable
               Type: ANY
-              Default: 
+              Default: /home/rubsak-admin/local/aretomo/1.3.3/AreTomo_1.3.3_Cuda112_11212022
 
           --are_bin
               Description: Binning factor for reconstruction
