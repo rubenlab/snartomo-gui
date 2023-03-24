@@ -1,13 +1,13 @@
         SERIALEM SETTINGS
-          Either one or more target files, or an MDOC file, is required.
+          Either an MDOC file or one or more target files are required.
 
           --target_files
               Description: PACE target files (more than one -> must be enclosed in quotes)
               Type: ANY
               Default: 
 
-          --mdoc_file
-              Description: Single MDOC file
+          --mdoc_files
+              Description: Tilt-series MDOC files (more than one -> must be enclosed in quotes)
               Type: ANY
               Default: 
 
@@ -70,7 +70,7 @@
           --verbosity
               Description: Verbosity level (0..8)
               Type: INT
-              Default: 5
+              Default: 4
 
           --max_minutes
               Description: Maximum run time, minutes
@@ -110,6 +110,21 @@
               Type: BOOL
               Default: false
 
+          --min_frames
+              Description: Minimum number of frames (EERs only) before printing warning
+              Type: INT
+              Default: 400
+
+          --max_frames
+              Description: Maximum number of frames (EERs only) before printing warning
+              Type: INT
+              Default: 1200
+
+          --temp_local
+              Description: Directory to copy EER files locally
+              Type: ANY
+              Default: 
+
           --ram_warn
               Description: Free system memory (GB) before warning printed
               Type: FLOAT
@@ -123,7 +138,7 @@
           --eer_local
               Description: Flag to copy EER files locally temporarily
               Type: BOOL
-              Default: $CP_EER_LOCAL
+              Default: false
 
           --eer_latency
               Description: Maximum header read time before micrograph is copied locally
@@ -156,7 +171,7 @@
           --motioncor_exe
               Description: MotionCor2 executable
               Type: ANY
-              Default: $MOTIONCOR2_EXE
+              Default: /home/rubsak-admin/local/motioncor/1.6.3/MotionCor2_1.6.3_Cuda112_Feb18_2023
 
           --do_dosewt
               Description: Flag to perform dose-weighting
@@ -193,23 +208,13 @@
               Type: FLOAT
               Default: 120.0
 
-          --min_frames
-              Description: Minimum number of frames (EERs only) before printing warning
-              Type: INT
-              Default: 400
-
-          --max_frames
-              Description: Maximum number of frames (EERs only) before printing warning
-              Type: INT
-              Default: 1200
-
         CTFFIND4 SETTINGS
           Settings for CTF estimation.
 
           --ctffind_dir
               Description: CTFFIND executable directory
               Type: ANY
-              Default: $CTFFIND4_BIN
+              Default: /home/rubsak-admin/local/ctffind/4.1.14/bin
 
           --ctf_slots
               Description: Maximum number of CTFFIND4 processes to run concurrently
@@ -264,6 +269,11 @@
         JANNI SETTINGS
           Settings for JANNI denoise.
 
+          --do_janni
+              Description: Denoise micrographs using JANNI
+              Type: BOOL
+              Default: false
+
           --janni_batch
               Description: Number of patches predicted in parallel
               Type: INT
@@ -277,25 +287,35 @@
           --janni_model
               Description: JANNI 'h5' model file
               Type: ANY
-              Default: $JANNI_MODEL
+              Default: /home/rubsak-admin/local/janni/gmodel_janni_20190703.h5
 
           --janni_env
               Description: JANNI conda environment
               Type: ANY
-              Default: $JANNI_ENV
+              Default: janni_cpu
 
         TOPAZ SETTINGS
           Settings for Topaz denoise.
+
+          --do_topaz
+              Description: Denoise micrographs using Topaz
+              Type: BOOL
+              Default: false
 
           --topaz_patch
               Description: Patch size for Topaz denoising
               Type: INT
               Default: 2048
 
+          --topaz_time
+              Description: Maximum duration, Topaz sometimes hangs
+              Type: ANY
+              Default: 2h
+
           --topaz_env
               Description: Topaz conda environment
               Type: ANY
-              Default: $TOPAZ_ENV
+              Default: topaz
 
         DOSEDISCRIMINATOR SETTINGS
           Settings for dose-fitting.
@@ -331,7 +351,7 @@
           --imod_dir
               Description: IMOD executable directory
               Type: ANY
-              Default: $IMOD_BIN
+              Default: /usr/local/IMOD/bin
 
         RUOTNOCON SETTINGS
           Settings for contour removal in IMOD reconstruction.
@@ -407,4 +427,4 @@
           --aretomo_exe
               Description: AreTomo executable
               Type: ANY
-              Default: $ARETOMO_EXE
+              Default: /home/rubsak-admin/local/aretomo/1.3.3/AreTomo_1.3.3_Cuda112_11212022
