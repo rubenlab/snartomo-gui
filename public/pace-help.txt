@@ -90,7 +90,7 @@
           --denoise_gpu
               Description: Flag to denoise using GPUs
               Type: BOOL
-              Default: false
+              Default: true
 
         ADVANCED SETTINGS
           These settings will rarely need to be changed.
@@ -123,17 +123,17 @@
           --temp_local
               Description: Directory to copy EER files locally
               Type: ANY
-              Default: 
+              Default: /tmp/SNARTomo-rubsak-admin
 
           --ram_warn
               Description: Free system memory (GB) before warning printed
               Type: FLOAT
-              Default: 20.0
+              Default: 20
 
           --ram_kill
               Description: Free system memory (GB) before exiting
               Type: FLOAT
-              Default: 10.0
+              Default: 10
 
           --eer_local
               Description: Flag to copy EER files locally temporarily
@@ -143,7 +143,12 @@
           --eer_latency
               Description: Maximum header read time before micrograph is copied locally
               Type: FLOAT
-              Default: 7
+              Default: 8
+
+          --temp_wait
+              Description: How long to wait (seconds) for MotionCor2 or CTFFIND4 /tmp files to be removed
+              Type: FLOAT
+              Default: 120.0
 
           --debug
               Description: Flag for debugging
@@ -203,11 +208,6 @@
               Type: INT
               Default: 1
 
-          --mc2_wait
-              Description: Maximum wait (seconds) for competing user's MotionCor2_FreeGpus.txt file to be deleted
-              Type: FLOAT
-              Default: 120.0
-
         CTFFIND4 SETTINGS
           Settings for CTF estimation.
 
@@ -264,7 +264,17 @@
           --ast_step
               Description: Astigmatism search step during fitting, Angstroms
               Type: FLOAT
-              Default: 100.0
+              Default: 1000
+
+          --ctf1d_dpi
+              Description: Resolution (dpi) of PNG of 1D CTF profile
+              Type: INT
+              Default: 250
+
+          --ctfplot_first
+              Description: Plots first CTF data for first N images in tilt series
+              Type: INT
+              Default: 13
 
         JANNI SETTINGS
           Settings for JANNI denoise.
@@ -292,7 +302,7 @@
           --janni_env
               Description: JANNI conda environment
               Type: ANY
-              Default: janni_cpu
+              Default: janni
 
         TOPAZ SETTINGS
           Settings for Topaz denoise.
@@ -352,6 +362,19 @@
               Description: IMOD executable directory
               Type: ANY
               Default: /usr/local/IMOD/bin
+
+        LAUDISERON SETTINGS
+          Settings for micrograph removal in IMOD reconstruction.
+
+          --do_laudiseron
+              Description: Remove micrographs based on alignment residual
+              Type: BOOL
+              Default: false
+
+          --laudiseron_sd
+              Description: Micrographs with residuals greater than this multiple of sigma will be removed
+              Type: FLOAT
+              Default: 3.0
 
         RUOTNOCON SETTINGS
           Settings for contour removal in IMOD reconstruction.
@@ -428,3 +451,21 @@
               Description: AreTomo executable
               Type: ANY
               Default: /home/rubsak-admin/local/aretomo/1.3.3/AreTomo_1.3.3_Cuda112_11212022
+
+        ISONET SETTINGS
+          Settings for IsoNet deconvolution.
+
+          --do_deconvolute
+              Description: Deconvolute using IsoNet
+              Type: BOOL
+              Default: false
+
+          --snr_falloff
+              Description: Signal-to-noise falloff
+              Type: FLOAT
+              Default: 0.7
+
+          --isonet_env
+              Description: IsoNet conda environment
+              Type: ANY
+              Default: isonet
