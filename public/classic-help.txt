@@ -32,7 +32,7 @@
           --mdoc_file
               Description: Single input example MDOC file, to extract pixel size, etc.
               Type: ANY
-              Default: None
+              Default: 
 
           --apix
               Description: Pixel size, A/px
@@ -87,7 +87,7 @@
           --denoise_gpu
               Description: Flag to denoise using GPUs
               Type: BOOL
-              Default: false
+              Default: true
 
         ADVANCED SETTINGS
           These settings will rarely need to be changed.
@@ -95,7 +95,7 @@
           --search_interval
               Description: Interval to check for new micrographs, seconds
               Type: INT
-              Default: 4
+              Default: 2
 
           --min_frames
               Description: Minimum number of frames (EERs only) before warning
@@ -110,7 +110,7 @@
           --temp_local
               Description: Directory to copy EER files locally
               Type: ANY
-              Default: 
+              Default: /tmp/SNARTomo-rubsak-admin
 
           --eer_local
               Description: Flag to temporarily copy EER files locally
@@ -120,7 +120,12 @@
           --eer_latency
               Description: Maximum header read time before micrograph is copied locally
               Type: FLOAT
-              Default: 7
+              Default: 8
+
+          --temp_wait
+              Description: How long to wait (seconds) for MotionCor2 or CTFFIND4 /tmp files to be removed
+              Type: FLOAT
+              Default: 120.0
 
           --debug
               Description: Flag for debugging
@@ -180,11 +185,6 @@
               Type: INT
               Default: 1
 
-          --mc2_wait
-              Description: Maximum wait (seconds) for competing user's MotionCor2_FreeGpus.txt file to be deleted
-              Type: FLOAT
-              Default: 120.0
-
         CTFFIND4 SETTINGS
           Settings for CTF estimation.
 
@@ -236,7 +236,17 @@
           --ast_step
               Description: Astigmatism search step during fitting, Angstroms
               Type: FLOAT
-              Default: 100.0
+              Default: 1000
+
+          --ctf1d_dpi
+              Description: Resolution (dpi) of PNG of 1D CTF profile
+              Type: INT
+              Default: 250
+
+          --ctfplot_first
+              Description: Plots first CTF data for first N images in tilt series
+              Type: INT
+              Default: -1
 
         JANNI SETTINGS
           Settings for JANNI denoise.
@@ -264,7 +274,25 @@
           --janni_env
               Description: JANNI conda environment
               Type: ANY
-              Default: janni_cpu
+              Default: janni
+
+        DOSEDISCRIMINATOR SETTINGS
+          Settings for dose-fitting.
+
+          --dosefit_min
+              Description: Minimum dose rate allowed, as a fraction of maximum dose rate
+              Type: FLOAT
+              Default: 0.1
+
+          --dosefit_resid
+              Description: Maximum residual during dose-fitting, as a fraction of maximum dose rate
+              Type: FLOAT
+              Default: 0.1
+
+          --dosefit_verbose
+              Description: Verbosity level for dose-fitting log file (0..8)
+              Type: ANY
+              Default: 6
 
         TOPAZ SETTINGS
           Settings for denoising.
@@ -289,6 +317,19 @@
               Type: ANY
               Default: topaz
 
+        RUOTNOCON SETTINGS
+          Settings for contour removal in IMOD reconstruction.
+
+          --do_ruotnocon
+              Description: Remove contours based on residual
+              Type: BOOL
+              Default: false
+
+          --ruotnocon_sd
+              Description: Contours with residuals greater than this multiple of sigma will be removed
+              Type: FLOAT
+              Default: 3.0
+
         IMOD SETTINGS
           Settings for IMOD: restacking and optional eTomo reconstruction.
 
@@ -301,6 +342,19 @@
               Description: IMOD eTomo batch directive file
               Type: ANY
               Default: 
+
+        LAUDISERON SETTINGS
+          Settings for micrograph removal in IMOD reconstruction.
+
+          --do_laudiseron
+              Description: Remove micrographs based on alignment residual
+              Type: BOOL
+              Default: false
+
+          --laudiseron_sd
+              Description: Micrographs with residuals greater than this multiple of sigma will be removed
+              Type: FLOAT
+              Default: 3.0
 
         ARETOMO SETTINGS
           Reconstruction will be computed either with AreTomo (default) or IMOD.
@@ -364,3 +418,21 @@
               Description: Maximum duration (AreTomo sometimes hangs)
               Type: ANY
               Default: 30m
+
+        ISONET SETTINGS
+          Settings for IsoNet deconvolution.
+
+          --do_deconvolute
+              Description: Deconvolute using IsoNet
+              Type: BOOL
+              Default: false
+
+          --snr_falloff
+              Description: Signal-to-noise falloff
+              Type: FLOAT
+              Default: 0.7
+
+          --isonet_env
+              Description: IsoNet conda environment
+              Type: ANY
+              Default: isonet
