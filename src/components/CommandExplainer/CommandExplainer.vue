@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, computed } from "vue";
+import { reactive, computed, watch } from "vue";
 import type { Group } from "./model";
 
 type Command = {
@@ -16,11 +16,18 @@ for (const g of props.groups) {
   }
 }
 const map = reactive(_map);
-const defaultActiveName =
-  props.groups.length > 0 ? props.groups[0].name : "REQUIRED SETTINGS";
 const state = reactive({
-  activeNames: [defaultActiveName],
+  activeNames: [] as string[],
 });
+watch(
+  () => props.groups,
+  (newGroups) => {
+    if (newGroups.length > 0) {
+      state.activeNames = [newGroups[0].name];
+    }
+  },
+  { immediate: true }
+);
 const command = computed(() => {
   let result = props.name;
   for (const key in map) {

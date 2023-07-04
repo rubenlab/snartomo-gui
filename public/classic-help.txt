@@ -1,20 +1,20 @@
-        INPUT MOVIE SETTINGS
+INPUT MOVIE SETTINGS
           One of these directories is required.
 
           --eer_dir
               Description: Input EER directory
               Type: ANY
-              Default: 
+              Default:
 
           --mrc_dir
               Description: Input MRC movie stack directory
               Type: ANY
-              Default: 
+              Default:
 
           --tif_dir
               Description: Input TIFF movie stack directory
               Type: ANY
-              Default: 
+              Default:
 
         GLOBAL SETTINGS
           These settings affect multiple steps.
@@ -27,12 +27,12 @@
           --mdoc_dir
               Description: Input MDOC directory, will be copied to reconstruction directory
               Type: ANY
-              Default: 
+              Default:
 
           --mdoc_file
               Description: Single input example MDOC file, to extract pixel size, etc.
               Type: ANY
-              Default: 
+              Default:
 
           --apix
               Description: Pixel size, A/px
@@ -143,7 +143,7 @@
           --gain_file
               Description: Input gain file
               Type: ANY
-              Default: 
+              Default:
 
           --no_gain
               Description: Flag when no gain file is to be used
@@ -341,7 +341,7 @@
           --batch_directive
               Description: IMOD eTomo batch directive file
               Type: ANY
-              Default: 
+              Default:
 
         LAUDISERON SETTINGS
           Settings for micrograph removal in IMOD reconstruction.
