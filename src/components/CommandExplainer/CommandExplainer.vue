@@ -50,6 +50,16 @@ const command = computed(() => {
   }
   return result;
 });
+
+const copyCommand = async () => {
+  try {
+    await navigator.clipboard.writeText(command.value);
+    console.log("Command copied to clipboard");
+  } catch (err) {
+    console.error("Failed to copy command: ", err);
+  }
+};
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const descriptionCollapse = reactive({} as any);
 
@@ -60,10 +70,22 @@ const setCollapse = (key: string, arr: Array<string>) => {
 
 <template>
   <el-affix position="top">
-    <h3 style="background-color: black; color: chocolate; margin-top: 0">
-      Command:
-      <pre>{{ command }}</pre>
-    </h3>
+    <div style="background-color: #778899">
+      <h3
+        style="
+          background-color: black;
+          color: chocolate;
+          margin-top: 0;
+          margin-bottom: 0;
+        "
+      >
+        Command:
+        <pre>{{ command }}</pre>
+      </h3>
+      <el-button type="primary" @click="copyCommand" style="margin-bottom: 1em"
+        >Copy</el-button
+      >
+    </div>
   </el-affix>
   <el-collapse v-model="state.activeNames">
     <el-collapse-item
