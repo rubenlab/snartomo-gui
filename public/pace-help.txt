@@ -1,15 +1,15 @@
-        SERIALEM SETTINGS
+SERIALEM SETTINGS
           Either an MDOC file or one or more target files are required.
 
           --target_files
               Description: PACE target files (more than one -> must be enclosed in quotes)
               Type: ANY
-              Default: NONE
+              Default:
 
           --mdoc_files
               Description: Tilt-series MDOC files (more than one -> must be enclosed in quotes)
               Type: ANY
-              Default: NONE
+              Default:
 
         INPUT MOVIE SETTINGS
           One of these directories is required.
@@ -17,17 +17,17 @@
           --eer_dir
               Description: Input EER directory
               Type: ANY
-              Default: NONE
+              Default:
 
           --mrc_dir
               Description: Input MRC movie stack directory
               Type: ANY
-              Default: NONE
+              Default:
 
           --tif_dir
               Description: Input TIFF movie stack directory
               Type: ANY
-              Default: NONE
+              Default:
 
         GLOBAL SETTINGS
           These settings affect multiple steps.
@@ -125,11 +125,6 @@
               Type: ANY
               Default: /tmp/SNARTomo-rubsak-admin
 
-          --temp_share
-              Description: Shared-memory directory
-              Type: ANY
-              Default: /dev/shm/SNARTomo-rubsak-admin
-
           --ram_warn
               Description: Free system memory (GB) before warning printed
               Type: FLOAT
@@ -171,7 +166,7 @@
           --gain_file
               Description: Input gain file
               Type: ANY
-              Default: 
+              Default:
 
           --no_gain
               Description: Flag when no gain file is to be used
@@ -356,7 +351,7 @@
           --batch_directive
               Description: IMOD eTomo batch directive file
               Type: ANY
-              Default: 
+              Default:
 
           --imod_slots
               Description: Maximum number of IMOD reconstructions to run concurrently

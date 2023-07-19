@@ -72,6 +72,7 @@ const setCollapse = (key: string, arr: Array<string>) => {
       :title="group.name"
       :name="group.name"
     >
+      <p>{{ group.description }}</p>
       <el-card v-for="argument in group.arguments" :key="argument.name">
         <template #header>
           <div>

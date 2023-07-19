@@ -43,7 +43,12 @@ function parseCommand(help: string, name: string): Command {
       if (currGrp != null) {
         cmd.groups.push(currGrp);
       }
-      currGrp = { name: content, arguments: [] } as Group;
+      const description = arr[i + 1].trim();
+      currGrp = {
+        name: content,
+        description: description,
+        arguments: [],
+      } as Group;
       i++; // skip the next group description line
     }
   }
