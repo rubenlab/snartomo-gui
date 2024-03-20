@@ -28,6 +28,18 @@ watch(
   },
   { immediate: true }
 );
+
+function isNumeric(value: any): boolean {
+  if (value === null || value === undefined) {
+    return false;
+  }
+  if (typeof value === "string" && value.trim() === "") {
+    return false;
+  }
+  const number = Number(value);
+  return !isNaN(number);
+}
+
 const command = computed(() => {
   let result = props.name;
   for (const key in map) {
@@ -42,7 +54,7 @@ const command = computed(() => {
       value = value.trim();
     }
     if (value != null && value !== "") {
-      if (value.indexOf(" ") >= 0 && !value.startsWith('"')) {
+      if (!isNumeric(value) && !value.startsWith('"')) {
         value = '"' + value + '"';
       }
       result += ` --${key} ${value}`;
